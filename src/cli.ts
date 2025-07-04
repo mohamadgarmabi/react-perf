@@ -2,27 +2,47 @@
 
 import { Command } from 'commander'
 import chalk from 'chalk'
-import { PerformanceAnalyzer, PerformanceReporter } from './performance-analyzer'
-import { BulkPerfChecker } from './bulk-perf-check'
-import { QuickPerfChecker } from './quick-perf-check'
-import { SimplePerformanceChecker } from './simple-perf-check'
+
+// Lazy load modules for better performance
+let PerformanceAnalyzer: any, PerformanceReporter: any
+let BulkPerfChecker: any, QuickPerfChecker: any, SimplePerformanceChecker: any
+
+const loadModules = async () => {
+  if (!PerformanceAnalyzer) {
+    const perfModule = await import('./performance-analyzer')
+    PerformanceAnalyzer = perfModule.PerformanceAnalyzer
+    PerformanceReporter = perfModule.PerformanceReporter
+  }
+  if (!BulkPerfChecker) {
+    const bulkModule = await import('./bulk-perf-check')
+    BulkPerfChecker = bulkModule.BulkPerfChecker
+  }
+  if (!QuickPerfChecker) {
+    const quickModule = await import('./quick-perf-check')
+    QuickPerfChecker = quickModule.QuickPerfChecker
+  }
+  if (!SimplePerformanceChecker) {
+    const simpleModule = await import('./simple-perf-check')
+    SimplePerformanceChecker = simpleModule.SimplePerformanceChecker
+  }
+}
 
 const program = new Command()
 
 program
-  .name('react-check-perf')
+  .name('react-perf')
   .description('🔍 A comprehensive React performance analysis tool')
   .version('1.0.0')
   .usage('[command] [options]')
   .addHelpText('after', `
 Examples:
-  $ react-check-perf analyze src/App.tsx
-  $ react-check-perf quick src/components/Button.tsx --verbose
-  $ react-check-perf bulk src/ --extensions .ts,.tsx --output report.json
-  $ react-check-perf simple src/App.tsx --fix-suggestions
-  $ react-check-perf interactive
+  $ react-perf analyze src/App.tsx
+  $ react-perf quick src/components/Button.tsx --verbose
+  $ react-perf bulk src/ --extensions .ts,.tsx --output report.json
+  $ react-perf simple src/App.tsx --fix-suggestions
+  $ react-perf interactive
 
-For more information, visit: https://github.com/mohamadgarmabi/react-check-perf
+For more information, visit: https://github.com/mohamadgarmabi/react-perf
   `)
 
 // Global options
@@ -49,6 +69,7 @@ program
       console.log(chalk.blue('🔍 React Performance Analyzer'))
       console.log(chalk.gray('Analyzing file for performance issues...\n'))
       
+      await loadModules()
       const analyzer = new PerformanceAnalyzer()
       const reporter = new PerformanceReporter()
       
@@ -90,6 +111,7 @@ program
       console.log(chalk.blue('⚡ Quick Performance Check'))
       console.log(chalk.gray('Fast analysis of common performance issues...\n'))
       
+      await loadModules()
       const checker = new QuickPerfChecker()
       checker.checkFile(file)
       
@@ -121,6 +143,7 @@ program
       console.log(chalk.blue('📝 Simple Performance Check'))
       console.log(chalk.gray('Basic analysis of performance issues...\n'))
       
+      await loadModules()
       const checker = new SimplePerformanceChecker()
       checker.checkFile(file)
       
@@ -168,6 +191,7 @@ program
       const extensions = options.extensions.split(',').map((ext: string) => ext.trim())
       const excludePatterns = options.exclude.split(',').map((pattern: string) => pattern.trim())
       
+      await loadModules()
       const checker = new BulkPerfChecker()
       checker.checkDirectory(directory, extensions)
       
@@ -245,6 +269,8 @@ program
         return
       }
 
+      await loadModules()
+      
       switch (mode) {
         case '1':
           const analyzer = new PerformanceAnalyzer()
@@ -305,7 +331,7 @@ program
       console.log(chalk.yellow('🔧 Fixable Issues Found:'))
       let fixableCount = 0
       
-      analysis.issues.forEach((issue, index) => {
+      analysis.issues.forEach((issue: any, index: number) => {
         if (issue.severity === 'high' || issue.severity === 'medium') {
           fixableCount++
           console.log(`\n${index + 1}. Line ${issue.line}: ${issue.message}`)
@@ -357,12 +383,5 @@ program
       process.exit(1)
     }
   })
-
-// Show help if no command provided
-if (process.argv.length === 2) {
-  console.log(chalk.blue('🚀 React Performance Checker'))
-  console.log(chalk.gray('A comprehensive tool for analyzing React performance issues\n'))
-  program.help()
-}
 
 program.parse() 
