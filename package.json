@@ -1,6 +1,6 @@
 {
   "name": "react-performanalyzer",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A comprehensive React performance analysis tool that checks for memory leaks, performance issues, and code quality problems",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
