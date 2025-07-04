@@ -10,6 +10,9 @@ A comprehensive React performance analysis tool that helps developers identify a
 - **CLI Interface**: Easy-to-use command-line interface
 - **Interactive Mode**: Guided analysis with prompts
 - **Bulk Analysis**: Scan entire directories for performance issues
+- **🚀 Performance Snapshots**: Capture and compare performance metrics over time
+- **🚨 PR Alerts**: Automatic regression detection and GitHub integration
+- **🔧 CI/CD Integration**: GitHub Actions workflow for automated performance checks
 
 ## 📦 Installation
 
@@ -71,6 +74,10 @@ npx react-performanalyzer f src/components/MyComponent.tsx
 # Project health assessment
 npx react-performanalyzer health src/
 npx react-performanalyzer h src/
+
+# CI/CD performance check with snapshots
+npx react-performanalyzer ci
+npx react-performanalyzer ci --baseline-branch main --output json,github-comment
 ```
 
 ### Alternative Package Managers
@@ -155,6 +162,7 @@ The tool provides a comprehensive scoring system:
 | `interactive` | `i` | Guided analysis with step-by-step prompts for choosing analysis type and files |
 | `fix` | `f` | Show automatic fix suggestions for a file |
 | `health` | `h` | Overall project health assessment |
+| `ci` | - | CI/CD performance check with snapshots and PR alerts |
 
 ### Quick Reference:
 - **`a`** - Full analysis (analyze)
@@ -164,6 +172,7 @@ The tool provides a comprehensive scoring system:
 - **`i`** - Interactive mode
 - **`f`** - Fix suggestions
 - **`h`** - Health assessment
+- **`ci`** - CI/CD performance check
 
 ## 📋 Example Output
 
@@ -202,6 +211,72 @@ The tool provides a comprehensive scoring system:
    💡 Suggestion: Consider using template literals (backticks) for better readability
 ```
 
+## 🚀 CI/CD Integration & Performance Snapshots
+
+### Performance Snapshots
+
+Capture and track performance metrics over time to detect regressions:
+
+```bash
+# Create a performance snapshot
+npx react-performanalyzer ci --output json
+
+# Compare against baseline
+npx react-performanalyzer ci --baseline-branch main
+```
+
+### GitHub Actions Integration
+
+Add this workflow to your `.github/workflows/performance-check.yml`:
+
+```yaml
+name: React Performance Check
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  performance-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - run: npm ci
+    - run: npm install -g react-performanalyzer
+    - run: npx react-performanalyzer ci --baseline-branch main
+```
+
+### PR Alerts
+
+The system automatically:
+- ✅ Detects performance regressions
+- 📊 Generates detailed reports
+- 💬 Posts GitHub comments
+- 🚫 Blocks PRs with critical issues
+- ⚠️ Warns about minor regressions
+
+### Configuration Options
+
+```bash
+# Custom thresholds
+npx react-performanalyzer ci \
+  --max-score-regression 3 \
+  --max-high-severity-increase 1 \
+  --max-total-issues-increase 5
+
+# Multiple output formats
+npx react-performanalyzer ci \
+  --output console,json,github-comment
+
+# Don't fail CI on regressions (for testing)
+npx react-performanalyzer ci --no-fail-on-regression
+```
+
+📖 **For detailed CI/CD documentation, see [PERFORMANCE_SNAPSHOTS.md](./PERFORMANCE_SNAPSHOTS.md)**
+
 ## 🏗️ Project Structure
 
 ```
@@ -210,8 +285,15 @@ src/
 ├── bulk-perf-check.ts        # Directory scanning functionality
 ├── quick-perf-check.ts       # Fast analysis mode
 ├── simple-perf-check.ts      # Basic analysis mode
+├── performance-snapshot.ts   # Snapshot management system
+├── pr-alerts.ts             # PR alert generation
+├── ci-performance-check.ts  # CI/CD integration
 ├── cli.ts                    # Command-line interface
 └── index.ts                  # Main exports
+
+.github/
+└── workflows/
+    └── performance-check.yml # GitHub Actions workflow
 ```
 
 ## 🤝 Contributing

@@ -8,6 +8,7 @@ import { PerformanceAnalyzer, PerformanceReporter } from './performance-analyzer
 import { BulkPerfChecker } from './bulk-perf-check'
 import { QuickPerfChecker } from './quick-perf-check'
 import { SimplePerformanceChecker } from './simple-perf-check'
+import { CIPerformanceChecker } from './ci-performance-check'
 
 const program = new Command()
 
@@ -360,6 +361,52 @@ program
       
       console.log(chalk.green('\n✅ Health check completed!'))
       console.log(chalk.cyan('💡 Use --generate-report for detailed analysis'))
+      process.exit(0)
+    } catch (error) {
+      console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
+      process.exit(1)
+    }
+  })
+
+// CI Performance Check command
+program
+  .command('ci')
+  .description('🚀 CI/CD performance check with snapshot comparison and PR alerts')
+  .option('--baseline-branch <branch>', 'Branch to compare against', 'main')
+  .option('--snapshots-dir <dir>', 'Directory to store snapshots', '.performance-snapshots')
+  .option('--max-score-regression <num>', 'Maximum allowed score regression', '5')
+  .option('--max-high-severity-increase <num>', 'Maximum allowed high severity issues increase', '2')
+  .option('--max-total-issues-increase <num>', 'Maximum allowed total issues increase', '10')
+  .option('--min-score-improvement <num>', 'Minimum score improvement to highlight', '2')
+  .option('--output <formats>', 'Output formats: console,json,github-comment', 'console')
+  .option('--no-fail-on-regression', 'Don\'t fail CI on performance regression')
+  .option('--no-warn-on-regression', 'Don\'t warn on performance regression')
+  .action(async (options: any) => {
+    try {
+      if (!options.color) {
+        chalk.level = 0
+      }
+      
+      console.log(chalk.blue('🚀 CI Performance Check'))
+      console.log(chalk.gray('Running performance analysis for CI/CD...\n'))
+      
+      const config = {
+        baselineBranch: options.baselineBranch,
+        snapshotsDir: options.snapshotsDir,
+        thresholds: {
+          maxScoreRegression: Number(options.maxScoreRegression),
+          maxHighSeverityIncrease: Number(options.maxHighSeverityIncrease),
+          maxTotalIssuesIncrease: Number(options.maxTotalIssuesIncrease),
+          minScoreImprovement: Number(options.minScoreImprovement)
+        },
+        outputFormats: options.output.split(','),
+        failOnRegression: !options.noFailOnRegression,
+        warnOnRegression: !options.noWarnOnRegression
+      }
+      
+      const checker = new CIPerformanceChecker(config)
+      await checker.run()
+      
       process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
