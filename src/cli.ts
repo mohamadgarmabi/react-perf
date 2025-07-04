@@ -70,6 +70,7 @@ program
         fs.writeFileSync(options.output, JSON.stringify(analysis, null, 2))
         console.log(chalk.green(`\n💾 Results saved to: ${options.output}`))
       }
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
@@ -101,6 +102,7 @@ program
         console.log('   - Performance pattern analysis')
         console.log('   - React-specific optimizations')
       }
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
@@ -133,6 +135,7 @@ program
         console.log('   - React component optimization')
         console.log('   - Code quality suggestions')
       }
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
@@ -188,6 +191,7 @@ program
         fs.writeFileSync(options.output, JSON.stringify(results, null, 2))
         console.log(chalk.green(`\n💾 Results saved to: ${options.output}`))
       }
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
@@ -279,6 +283,7 @@ program
         default:
           console.log(chalk.red('❌ Invalid mode selected'))
       }
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
@@ -327,6 +332,7 @@ program
           console.log(chalk.yellow('💡 Use --apply flag to automatically apply fixes'))
         }
       }
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
@@ -354,10 +360,16 @@ program
       
       console.log(chalk.green('\n✅ Health check completed!'))
       console.log(chalk.cyan('💡 Use --generate-report for detailed analysis'))
+      process.exit(0)
     } catch (error) {
       console.error(chalk.red('❌ Error:'), error instanceof Error ? error.message : error)
       process.exit(1)
     }
   })
 
-program.parse() 
+program.parse()
+
+// Exit after parsing if no command was executed
+if (process.argv.length <= 2) {
+  process.exit(0)
+} 
