@@ -4,6 +4,7 @@
   "description": "A comprehensive React performance analysis tool that checks for memory leaks, performance issues, and code quality problems",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "bin": {
     "react-performanalyzer": "dist/cli.js",
     "rperf": "dist/cli.js"
@@ -14,9 +15,6 @@
     "build:analyze": "webpack --mode production --analyze",
     "dev": "ts-node src/cli.ts",
     "start": "node dist/cli.js",
-    "test": "jest",
-    "lint": "eslint src/**/*.ts",
-    "format": "prettier --write src/**/*.ts",
     "prepare": "npm run build",
     "size": "npm run build:optimized && npm run analyze:size",
     "analyze:size": "npx webpack-bundle-analyzer dist/bundle-stats.json",
