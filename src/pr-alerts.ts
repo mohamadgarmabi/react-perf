@@ -1,6 +1,7 @@
 import chalk from 'chalk'
 import { PerformanceSnapshotManager } from './performance-snapshot'
 import type { SnapshotComparison, PerformanceSnapshot } from './performance-snapshot'
+import type { FileAnalysis } from './performance-analyzer'
 
 export interface AlertThresholds {
   maxScoreRegression: number
@@ -160,9 +161,6 @@ export class PRAlertSystem {
   }
 
   private generateStatusMessage(status: string, comparison: SnapshotComparison): string {
-
-    console.log(status, comparison)
-
     switch (status) {
       case 'pass':
         return '✅ Performance check passed - no significant regressions detected'

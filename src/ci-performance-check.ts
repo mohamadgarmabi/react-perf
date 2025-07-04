@@ -3,7 +3,7 @@
 import { execSync } from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
-import { PerformanceAnalyzer } from './index'
+import { PerformanceAnalyzer, BulkPerfChecker } from './index'
 import { PerformanceSnapshotManager } from './performance-snapshot'
 import { PRAlertSystem } from './pr-alerts'
 
