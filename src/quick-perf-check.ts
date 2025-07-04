@@ -1,7 +1,6 @@
 #!/usr/bin/env ts-node
 
 import * as fs from "fs"
-import * as readline from "readline"
 
 interface PerformanceIssue {
   line: number
@@ -278,40 +277,4 @@ export class QuickPerfChecker {
       console.log("💀 Critical issues! Immediate action required.")
     }
   }
-}
-
-async function main(): Promise<void> {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
-
-  console.log("🚀 Quick Performance Checker")
-  console.log("Fast analysis of common performance issues\n")
-
-  const question = (query: string): Promise<string> => {
-    return new Promise((resolve) => {
-      rl.question(query, resolve)
-    })
-  }
-
-  try {
-    const filePath = await question("Enter file path: ")
-
-    if (!filePath) {
-      console.log("❌ No file path provided")
-      return
-    }
-
-    const checker = new QuickPerfChecker()
-    checker.checkFile(filePath)
-  } catch (error) {
-    console.error("❌ Error:", error instanceof Error ? error.message : error)
-  } finally {
-    rl.close()
-  }
-}
-
-if (require.main === module) {
-  main().catch(console.error)
 }

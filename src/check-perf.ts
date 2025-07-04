@@ -48,6 +48,4 @@ async function main(): Promise<void> {
 }
 
 // Run the script
-if (require.main === module) {
-  main().catch(console.error)
-}
+main().catch(console.error)

@@ -416,18 +416,3 @@ export class BulkPerfChecker {
     }
   }
 }
-
-async function main(): Promise<void> {
-  const args = process.argv.slice(2)
-  const dirPath = args[0] || "."
-
-  console.log("🚀 Bulk Performance Checker")
-  console.log("Scans entire directories for performance issues\n")
-
-  const checker = new BulkPerfChecker()
-  checker.checkDirectory(dirPath)
-}
-
-if (require.main === module) {
-  main().catch(console.error)
-}

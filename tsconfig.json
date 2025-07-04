@@ -28,7 +28,8 @@
     "importHelpers": true,
     "importsNotUsedAsValues": "remove",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force"
   },
   "include": [
     "src/**/*"

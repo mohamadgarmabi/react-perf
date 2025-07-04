@@ -3,29 +3,11 @@
 import { Command } from 'commander'
 import chalk from 'chalk'
 
-// Lazy load modules for better performance
-let PerformanceAnalyzer: any, PerformanceReporter: any
-let BulkPerfChecker: any, QuickPerfChecker: any, SimplePerformanceChecker: any
-
-const loadModules = async () => {
-  if (!PerformanceAnalyzer) {
-    const perfModule = await import('./performance-analyzer')
-    PerformanceAnalyzer = perfModule.PerformanceAnalyzer
-    PerformanceReporter = perfModule.PerformanceReporter
-  }
-  if (!BulkPerfChecker) {
-    const bulkModule = await import('./bulk-perf-check')
-    BulkPerfChecker = bulkModule.BulkPerfChecker
-  }
-  if (!QuickPerfChecker) {
-    const quickModule = await import('./quick-perf-check')
-    QuickPerfChecker = quickModule.QuickPerfChecker
-  }
-  if (!SimplePerformanceChecker) {
-    const simpleModule = await import('./simple-perf-check')
-    SimplePerformanceChecker = simpleModule.SimplePerformanceChecker
-  }
-}
+// Import modules directly for better compatibility
+import { PerformanceAnalyzer, PerformanceReporter } from './performance-analyzer'
+import { BulkPerfChecker } from './bulk-perf-check'
+import { QuickPerfChecker } from './quick-perf-check'
+import { SimplePerformanceChecker } from './simple-perf-check'
 
 const program = new Command()
 
@@ -69,7 +51,6 @@ program
       console.log(chalk.blue('🔍 React Performance Analyzer'))
       console.log(chalk.gray('Analyzing file for performance issues...\n'))
       
-      await loadModules()
       const analyzer = new PerformanceAnalyzer()
       const reporter = new PerformanceReporter()
       
@@ -111,7 +92,6 @@ program
       console.log(chalk.blue('⚡ Quick Performance Check'))
       console.log(chalk.gray('Fast analysis of common performance issues...\n'))
       
-      await loadModules()
       const checker = new QuickPerfChecker()
       checker.checkFile(file)
       
@@ -143,7 +123,6 @@ program
       console.log(chalk.blue('📝 Simple Performance Check'))
       console.log(chalk.gray('Basic analysis of performance issues...\n'))
       
-      await loadModules()
       const checker = new SimplePerformanceChecker()
       checker.checkFile(file)
       
@@ -191,7 +170,6 @@ program
       const extensions = options.extensions.split(',').map((ext: string) => ext.trim())
       const excludePatterns = options.exclude.split(',').map((pattern: string) => pattern.trim())
       
-      await loadModules()
       const checker = new BulkPerfChecker()
       checker.checkDirectory(directory, extensions)
       
@@ -269,8 +247,6 @@ program
         return
       }
 
-      await loadModules()
-      
       switch (mode) {
         case '1':
           const analyzer = new PerformanceAnalyzer()

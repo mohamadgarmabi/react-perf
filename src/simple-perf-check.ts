@@ -261,6 +261,4 @@ async function main(): Promise<void> {
   }
 }
 
-if (require.main === module) {
-  main().catch(console.error)
-}
+main().catch(console.error)
