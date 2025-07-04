@@ -30,19 +30,19 @@ const loadModules = async () => {
 const program = new Command()
 
 program
-  .name('react-perf')
+  .name('react-performanalyzer')
   .description('🔍 A comprehensive React performance analysis tool')
   .version('1.0.0')
   .usage('[command] [options]')
   .addHelpText('after', `
 Examples:
-  $ react-perf analyze src/App.tsx
-  $ react-perf quick src/components/Button.tsx --verbose
-  $ react-perf bulk src/ --extensions .ts,.tsx --output report.json
-  $ react-perf simple src/App.tsx --fix-suggestions
-  $ react-perf interactive
+  $ react-performanalyzer analyze src/App.tsx
+  $ react-performanalyzer quick src/components/Button.tsx --verbose
+  $ react-performanalyzer bulk src/ --extensions .ts,.tsx --output report.json
+  $ react-performanalyzer simple src/App.tsx --fix-suggestions
+  $ react-performanalyzer interactive
 
-For more information, visit: https://github.com/mohamadgarmabi/react-perf
+For more information, visit: https://github.com/mohamadgarmabi/react-performanalyzer
   `)
 
 // Global options

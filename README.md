@@ -1,4 +1,4 @@
-# React Performance Checker (react-perf)
+# React Performance Checker (react-performanalyzer)
 
 A comprehensive React performance analysis tool that helps developers identify and fix performance issues in their React applications.
 
@@ -15,29 +15,29 @@ A comprehensive React performance analysis tool that helps developers identify a
 
 ### npm
 ```bash
-npm install react-perf
+npm install react-performanalyzer
 ```
 
 ### pnpm
 ```bash
-pnpm add react-perf
+pnpm add react-performanalyzer
 ```
 
 ### yarn
 ```bash
-yarn add react-perf
+yarn add react-performanalyzer
 ```
 
 ### Global Installation
 ```bash
 # npm
-npm install -g react-perf
+npm install -g react-performanalyzer
 
 # pnpm
-pnpm add -g react-perf
+pnpm add -g react-performanalyzer
 
 # yarn
-yarn global add react-perf
+yarn global add react-performanalyzer
 ```
 
 ## 🛠️ Usage
@@ -45,32 +45,32 @@ yarn global add react-perf
 ### Command Line Interface
 ```bash
 # Full analysis of a single file
-npx react-perf analyze src/components/MyComponent.tsx
-npx react-perf a src/components/MyComponent.tsx
+npx react-performanalyzer analyze src/components/MyComponent.tsx
+npx react-performanalyzer a src/components/MyComponent.tsx
 
 # Quick performance check
-npx react-perf quick src/components/MyComponent.tsx
-npx react-perf q src/components/MyComponent.tsx
+npx react-performanalyzer quick src/components/MyComponent.tsx
+npx react-performanalyzer q src/components/MyComponent.tsx
 
 # Simple check with basic analysis
-npx react-perf simple src/components/MyComponent.tsx
-npx react-perf s src/components/MyComponent.tsx
+npx react-performanalyzer simple src/components/MyComponent.tsx
+npx react-performanalyzer s src/components/MyComponent.tsx
 
 # Bulk analysis of entire directory
-npx react-perf bulk src/components --extensions .ts,.tsx,.js,.jsx
-npx react-perf b src/components --extensions .ts,.tsx,.js,.jsx
+npx react-performanalyzer bulk src/components --extensions .ts,.tsx,.js,.jsx
+npx react-performanalyzer b src/components --extensions .ts,.tsx,.js,.jsx
 
 # Interactive mode
-npx react-perf interactive
-npx react-perf i
+npx react-performanalyzer interactive
+npx react-performanalyzer i
 
 # Fix suggestions
-npx react-perf fix src/components/MyComponent.tsx
-npx react-perf f src/components/MyComponent.tsx
+npx react-performanalyzer fix src/components/MyComponent.tsx
+npx react-performanalyzer f src/components/MyComponent.tsx
 
 # Project health assessment
-npx react-perf health src/
-npx react-perf h src/
+npx react-performanalyzer health src/
+npx react-performanalyzer h src/
 ```
 
 ### Alternative Package Managers
@@ -79,22 +79,22 @@ If you have installed globally or prefer different package managers:
 
 ```bash
 # Using pnpm
-pnpm react-perf analyze src/components/MyComponent.tsx
-pnpm react-perf a src/components/MyComponent.tsx
+pnpm react-performanalyzer analyze src/components/MyComponent.tsx
+pnpm react-performanalyzer a src/components/MyComponent.tsx
 
 # Using yarn
-yarn react-perf analyze src/components/MyComponent.tsx
-yarn react-perf a src/components/MyComponent.tsx
+yarn react-performanalyzer analyze src/components/MyComponent.tsx
+yarn react-performanalyzer a src/components/MyComponent.tsx
 
 # Using global installation
-react-perf analyze src/components/MyComponent.tsx
-react-perf a src/components/MyComponent.tsx
+react-performanalyzer analyze src/components/MyComponent.tsx
+react-performanalyzer a src/components/MyComponent.tsx
 ```
 
 ### Programmatic Usage
 
 ```typescript
-import { PerformanceAnalyzer, PerformanceReporter } from 'react-perf';
+import { PerformanceAnalyzer, PerformanceReporter } from 'react-performanalyzer';
 
 const analyzer = new PerformanceAnalyzer();
 const reporter = new PerformanceReporter();
@@ -222,7 +222,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ```bash
 # Clone the repository
-git clone https://github.com/mohamadgarmabi/react-perf.git
+git clone https://github.com/mohamadgarmabi/react-performanalyzer.git
 
 # Install dependencies
 npm install
@@ -240,7 +240,7 @@ yarn build
 ```
 
 ### Repository
-- **GitHub**: [https://github.com/mohamadgarmabi/react-perf](https://github.com/mohamadgarmabi/react-perf)
+- **GitHub**: [https://github.com/mohamadgarmabi/react-performanalyzer](https://github.com/mohamadgarmabi/react-performanalyzer)
 - **Author**: [Mohammad Garmabi](https://github.com/mohamadgarmabi)
 
 ## 📄 License
@@ -251,13 +251,13 @@ This project is licensed under the MIT License.
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/mohamadgarmabi/react-perf/issues) page
+1. Check the [Issues](https://github.com/mohamadgarmabi/react-performanalyzer/issues) page
 2. Create a new issue with detailed information
 3. Include code examples and error messages
 
 ### Links
-- **Repository**: [https://github.com/mohamadgarmabi/react-perf](https://github.com/mohamadgarmabi/react-perf)
-- **Issues**: [https://github.com/mohamadgarmabi/react-perf/issues](https://github.com/mohamadgarmabi/react-perf/issues)
+- **Repository**: [https://github.com/mohamadgarmabi/react-performanalyzer](https://github.com/mohamadgarmabi/react-performanalyzer)
+- **Issues**: [https://github.com/mohamadgarmabi/react-performanalyzer/issues](https://github.com/mohamadgarmabi/react-performanalyzer/issues)
 - **Author**: [Mohammad Garmabi](https://github.com/mohamadgarmabi)
 
 ## 🔗 Related Tools

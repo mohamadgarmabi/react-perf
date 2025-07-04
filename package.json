@@ -1,11 +1,11 @@
 {
-  "name": "react-perf",
+  "name": "react-performanalyzer",
   "version": "0.0.1",
   "description": "A comprehensive React performance analysis tool that checks for memory leaks, performance issues, and code quality problems",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "react-perf": "dist/cli.js",
+    "react-performanalyzer": "dist/cli.js",
     "rperf": "dist/cli.js"
   },
   "scripts": {
@@ -38,12 +38,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mohamadgarmabi/react-perf.git"
+    "url": "https://github.com/mohamadgarmabi/react-performanalyzer.git"
   },
   "bugs": {
-    "url": "https://github.com/mohamadgarmabi/react-perf/issues"
+    "url": "https://github.com/mohamadgarmabi/react-performanalyzer/issues"
   },
-  "homepage": "https://github.com/mohamadgarmabi/react-perf#readme",
+  "homepage": "https://github.com/mohamadgarmabi/react-performanalyzer#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0"
